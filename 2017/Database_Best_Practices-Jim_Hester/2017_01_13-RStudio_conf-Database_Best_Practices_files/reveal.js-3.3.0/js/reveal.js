@@ -868,6 +868,8 @@
 
 		if( config.postMessage ) {
 			window.addEventListener( 'message', function ( event ) {
+                // Archive hardening: other origins cannot invoke the slide API.
+                if( event.origin === 'null' || event.origin !== window.location.origin ) return;
 				var data = event.data;
 
 				// Make sure we're dealing with JSON
